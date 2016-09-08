@@ -3,8 +3,9 @@ package worktimer;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by linoor on 9/5/16.
@@ -21,7 +22,7 @@ public class Commute {
     private String type;
 
     @OneToMany
-    private Set<Measurement> measurements;
+    private List<Measurement> measurements = new ArrayList<>();
 
     private Commute() {}
 
@@ -34,7 +35,7 @@ public class Commute {
         return id;
     }
 
-    public void setMeasurements(Set<Measurement> measurements) {
-        this.measurements = measurements;
+    public void addMeasurement(Measurement measurement) {
+        this.measurements.add(measurement);
     }
 }
