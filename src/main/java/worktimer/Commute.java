@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by linoor on 9/5/16.
@@ -19,21 +20,21 @@ public class Commute {
     private String note;
     private String type;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date startTime;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endTime;
+    @OneToMany
+    private Set<Measurement> measurements;
 
     private Commute() {}
 
-    public Commute(String note, String type, Date startTime, Date endTime) {
+    public Commute(String note, String type) {
         this.note = note;
         this.type = type;
-        this.startTime = startTime;
-        this.endTime = endTime;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setMeasurements(Set<Measurement> measurements) {
+        this.measurements = measurements;
     }
 }

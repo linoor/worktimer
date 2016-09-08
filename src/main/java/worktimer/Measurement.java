@@ -20,9 +20,13 @@ public class Measurement {
 
     private final Type type;
 
-    public Measurement(Date timestamp, Type type) {
+    @ManyToOne
+    private final Commute commute;
+
+    public Measurement(Date timestamp, Type type, Commute commute) {
         this.timestamp = timestamp;
         this.type = type;
+        this.commute = commute;
     }
 
     enum Type {

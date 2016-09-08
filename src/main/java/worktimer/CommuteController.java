@@ -31,7 +31,7 @@ public class CommuteController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/commutes/start")
     public @ResponseBody ResponseEntity<?> startCommute() {
-        Commute commute = commuteRepository.save(new Commute("", "type", new Date(), new Date()));
+        Commute commute = commuteRepository.save(new Commute("", "type"));
 
         Resource<Commute> resource = new Resource<>(commute);
         resource.add(entityLinks.linkToSingleResource(Commute.class, commute.getId()));
