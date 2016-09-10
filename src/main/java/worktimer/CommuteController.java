@@ -87,5 +87,21 @@ public class CommuteController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/commutes/{id}/start")
+    public @ResponseBody ResponseEntity<?> pauseCommute(@PathVariable("id") long commuteId) {
+        try {
+            Commute commute = commuteRepository.findOne(commuteId);
+            Measurement measurement = measurementRepository.save(new Measurement(Measurement.Type.START, commute));
+            commute.addMeasurement(measurement);
+
+            Resource<Measurement> resource = new Resource<>(measurement);
+            resource.add(entityLinks.linkToSingleResource(Commute.class, commute.getId()));
+
+            return ResponseEntity.ok(resource);
+        } catch (NullPointerException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }
