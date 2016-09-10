@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface MeasurementRepository extends CrudRepository<Measurement, Long> {
     List<Measurement> findAllByCommuteAndType(Commute commute, Measurement.Type type);
+    List<Measurement> findAllByCommute(Commute commute);
 }
 

@@ -1,15 +1,11 @@
 package worktimer;
 
-import javaslang.control.Option;
-import javaslang.control.Try;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.EntityLinks;
 import org.springframework.hateoas.Resource;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by linoor on 9/8/16.
@@ -49,7 +49,7 @@ public class CommuteController {
         return ResponseEntity.ok(resource);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/commutes/stop/{id}")
+    @RequestMapping(method = RequestMethod.POST, value = "/commutes/{id}/stop")
     public @ResponseBody ResponseEntity<?> endCommute(@PathVariable("id") long id) {
         try {
             Commute commute = commuteRepository.findOne(id);
@@ -69,6 +69,19 @@ public class CommuteController {
             resource.add(entityLinks.linkToSingleResource(Commute.class, commute.getId()));
 
             return ResponseEntity.ok(resource);
+        } catch (NullPointerException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/commutes/{id}/measurements")
+    public @ResponseBody ResponseEntity<?> getMeasurements(@PathVariable("id") long commuteId) {
+        try {
+            Commute commute = commuteRepository.findOne(commuteId);
+            List<Measurement> measurements = (measurementRepository.findAllByCommute(commute));
+            Resources<Measurement> resources = new Resources<>(measurements);
+            resources.add(linkTo(methodOn(CommuteController.class).getMeasurements(commuteId)).withSelfRel());
+            return ResponseEntity.ok(resources);
         } catch (NullPointerException e) {
             return ResponseEntity.notFound().build();
         }
