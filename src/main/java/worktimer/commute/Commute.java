@@ -1,10 +1,10 @@
-package worktimer;
+package worktimer.commute;
 
 import lombok.Data;
+import worktimer.measurement.Measurement;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

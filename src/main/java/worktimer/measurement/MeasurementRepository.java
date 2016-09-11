@@ -1,6 +1,7 @@
-package worktimer;
+package worktimer.measurement;
 
 import org.springframework.data.repository.CrudRepository;
+import worktimer.commute.Commute;
 
 import java.util.List;
 

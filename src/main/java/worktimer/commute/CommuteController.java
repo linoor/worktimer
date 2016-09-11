@@ -1,4 +1,4 @@
-package worktimer;
+package worktimer.commute;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import worktimer.measurement.Measurement;
+import worktimer.measurement.MeasurementRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -79,6 +79,7 @@ public class CommuteController {
         try {
             Commute commute = commuteRepository.findOne(commuteId);
             List<Measurement> measurements = (measurementRepository.findAllByCommute(commute));
+
             Resources<Measurement> resources = new Resources<>(measurements);
             resources.add(linkTo(methodOn(CommuteController.class).getMeasurements(commuteId)).withSelfRel());
             return ResponseEntity.ok(resources);
@@ -88,11 +89,22 @@ public class CommuteController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/commutes/{id}/start")
-    public @ResponseBody ResponseEntity<?> pauseCommute(@PathVariable("id") long commuteId) {
+    public @ResponseBody ResponseEntity<?> restartCommute(@PathVariable("id") long commuteId) {
         try {
             Commute commute = commuteRepository.findOne(commuteId);
+
+            List<Measurement> stoppedMeasurements = measurementRepository.findAllByCommuteAndType(commute, Measurement.Type.STOP);
+            List<Measurement> startMeasurements = measurementRepository.findAllByCommuteAndType(commute, Measurement.Type.START);
+            if (startMeasurements.size() == 0) {
+                return ResponseEntity.status(HttpStatus.OK).body("This commute has not even been started");
+            }
+            else if (startMeasurements.size() > stoppedMeasurements.size()) {
+                return ResponseEntity.status(HttpStatus.OK).body("This commute has already been started");
+            }
+
             Measurement measurement = measurementRepository.save(new Measurement(Measurement.Type.START, commute));
             commute.addMeasurement(measurement);
+
 
             Resource<Measurement> resource = new Resource<>(measurement);
             resource.add(entityLinks.linkToSingleResource(Commute.class, commute.getId()));

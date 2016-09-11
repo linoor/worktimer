@@ -1,6 +1,7 @@
-package worktimer;
+package worktimer.measurement;
 
 import lombok.Data;
+import worktimer.commute.Commute;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,7 +36,7 @@ public class Measurement {
         this(new Date(), type, commute);
     }
 
-    enum Type {
+    public enum Type {
         START, STOP
     }
 }

@@ -1,4 +1,4 @@
-package worktimer;
+package worktimer.commute;
 
 import org.springframework.data.repository.CrudRepository;
 

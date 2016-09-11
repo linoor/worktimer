@@ -3,6 +3,8 @@ package worktimer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import worktimer.place.Place;
+import worktimer.place.PlaceRepository;
 
 /**
  * Created by linoor on 9/5/16.

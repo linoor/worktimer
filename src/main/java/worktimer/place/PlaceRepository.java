@@ -1,4 +1,4 @@
-package worktimer;
+package worktimer.place;
 
 import org.springframework.data.repository.CrudRepository;
 
