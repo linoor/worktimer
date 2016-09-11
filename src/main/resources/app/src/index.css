@@ -1,5 +1,13 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+  font: 100% Helvetica, sans-serif;
+  color: #34495e;
+  background: #3498db; }
+
+.timer {
+  font-size: 150px;
+  font-family: "Montserrat", sans-serif; }
+
+.seconds {
+  font-size: 85%; }
+
+/*# sourceMappingURL=index.css.map */
