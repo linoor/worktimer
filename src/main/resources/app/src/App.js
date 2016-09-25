@@ -17,6 +17,7 @@ class App extends Component {
 
         this.startTimer = this.startTimer.bind(this, this.state.secondsElapsed);
         this.tick = this.tick.bind(this);
+        this.endtimer = this.endTimer.bind(this);
   }
     tick() {
         this.setState({
@@ -42,6 +43,10 @@ class App extends Component {
                });
                this.startTimer();
            });
+       } else if (this.state.secondsElapsed > 0) {
+           $.post(this.state.commuteHref + "/stop", (result) => {
+               this.endTimer();
+           })
        }
     }
 
