@@ -31,12 +31,12 @@ class App extends Component {
 
     endTimer() {
         clearInterval(this.interval);
-        this.setState({
-            secondsElapsed: 0,
-            timestamp: null,
-            started: false,
-            commuteHref: null
-        })
+        //this.setState({
+        //    secondsElapsed: 0,
+        //    timestamp: null,
+        //    started: false,
+        //    commuteHref: null
+        //})
     }
 
     handleClick() {
@@ -52,6 +52,9 @@ class App extends Component {
        } else if (this.state.secondsElapsed > 0) {
            $.post(this.state.commuteHref + "/stop", (result) => {
                this.endTimer();
+               this.setState({
+                   started: false
+               })
            })
        }
     }
@@ -60,7 +63,10 @@ class App extends Component {
     return (
       <div className="App">
           <Timer seconds={this.state.secondsElapsed} started={this.state.started} />
-          <Starter started={this.state.started} handler={this.handleClick.bind(this)} />
+          {this.props.children && React.cloneElement(this.props.children, {
+             started: this.state.started,
+              handler: this.handleClick.bind(this)
+          })}
       </div>
     );
     }
