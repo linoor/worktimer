@@ -37,6 +37,7 @@ public class CommuteController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/commutes/start")
+    @CrossOrigin(origins = "http://localhost:3000")
     public @ResponseBody ResponseEntity<?> startCommute() {
         Commute commute = commuteRepository.save(new Commute("", "type"));
         Measurement measurement = measurementRepository.save(new Measurement(Measurement.Type.START, commute));
