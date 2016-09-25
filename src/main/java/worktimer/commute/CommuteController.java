@@ -9,6 +9,7 @@ import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import worktimer.place.PlaceRepository;
 import worktimer.measurement.Measurement;
 import worktimer.measurement.MeasurementRepository;
 

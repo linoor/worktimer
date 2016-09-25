@@ -1,7 +1,7 @@
 package worktimer.commute;
 
 import lombok.Data;
-import worktimer.Place.Place;
+import worktimer.place.Place;
 import worktimer.measurement.Measurement;
 
 import javax.persistence.*;
