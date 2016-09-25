@@ -18,7 +18,19 @@ class Commute extends Component {
             secondsElapsed: 0,
             note: "",
             type: "",
-            places: []
+            places: [],
+            from: null,
+            to: null,
+        };
+
+        this.update = this.update.bind(this);
+    }
+
+    update(field) {
+        return (e) => {
+            let state = {};
+            state[field] = e.target.value;
+            this.setState(state);
         }
     }
 
@@ -34,7 +46,12 @@ class Commute extends Component {
         return (
             <div>
                 <Row>
-                    <Edit note={this.state.note} type={this.state.type} places={this.state.places} />
+                    <Edit note={this.state.note}
+                          type={this.state.type}
+                          places={this.state.places}
+                          from={this.state.from}
+                          to={this.state.to}
+                          updateHandler={this.update} />
                 </Row>
             </div>
         )

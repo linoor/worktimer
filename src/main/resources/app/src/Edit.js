@@ -9,9 +9,17 @@ import { Well, FormGroup, FormControl, ControlLabel  } from "react-bootstrap";
 class Edit extends Component {
     constructor(props) {
         super(props);
-
     }
 
+    getValidationState() {
+       if (this.props.from === this.props.to) {
+           console.log(this.props.from);
+           console.log(this.props.to);
+           return 'error';
+       } else {
+           return 'sucess';
+       }
+    }
 
     render() {
 
@@ -24,15 +32,17 @@ class Edit extends Component {
                     <FormGroup bsSize="large">
                         <FormControl type="text" placeholder="Note" />
                     </FormGroup>
-                    <FormGroup bsSize="large">
+                    <FormGroup bsSize="large" validationState={this.getValidationState()}>
                         <ControlLabel>From</ControlLabel>
-                        <FormControl componentClass="select" placeholder="select">
+                        <FormControl componentClass="select" placeholder="select"
+                                     onChange={this.props.updateHandler('from')}>
                             {placesFrom}
                         </FormControl>
                     </FormGroup>
-                    <FormGroup bsSize="large">
+                    <FormGroup bsSize="large" validationState={this.getValidationState()}>
                         <ControlLabel>To</ControlLabel>
-                        <FormControl componentClass="select" placeholder="select">
+                        <FormControl componentClass="select" placeholder="select"
+                                     onChange={this.props.updateHandler('to')}>
                             {placesTo}
                         </FormControl>
                     </FormGroup>
