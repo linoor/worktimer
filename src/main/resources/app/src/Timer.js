@@ -11,8 +11,8 @@ function str_pad_left(string,pad,length) {
 
 class Timer extends Component {
     render() {
-        let minutes = this.props.started? str_pad_left(Math.floor(this.props.seconds / 60), '0', 2) : '00';
-        let seconds = this.props.started? str_pad_left(this.props.seconds - minutes * 60, '0', 2) : '00';
+        let minutes = str_pad_left(Math.floor(this.props.seconds / 60), '0', 2);
+        let seconds = str_pad_left(this.props.seconds - minutes * 60, '0', 2);
 
         return (
             <Row className="timer">
