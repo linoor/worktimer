@@ -3,6 +3,7 @@ import './App.css';
 import Timer from './Timer.js';
 import Starter from './Starter.js';
 import $ from 'jquery';
+import { browserHistory } from 'react-router';
 
 class App extends Component {
     constructor(props, context) {
@@ -54,7 +55,9 @@ class App extends Component {
                this.endTimer();
                this.setState({
                    started: false
-               })
+               });
+               let path = this.state.commuteHref.replace("/api", "");
+               this.props.history.push(path);
            })
        }
     }
