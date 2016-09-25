@@ -1,13 +1,17 @@
 body {
+  margin: 0 auto;
   font: 100% Helvetica, sans-serif;
   color: #34495e;
   background: #3498db; }
 
 .timer {
-  font-size: 150px;
+  font-size: 100px;
   font-family: "Montserrat", sans-serif; }
 
 .seconds {
   font-size: 85%; }
+
+#startButton {
+  width: 200px; }
 
 /*# sourceMappingURL=index.css.map */
