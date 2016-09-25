@@ -36,8 +36,11 @@ class Commute extends Component {
 
     componentDidMount() {
         $.get('http://localhost:8080/api/places', (results) => {
+            const places = results._embedded.places.map((result) => result.name);
             this.setState({
-                places: results._embedded.places.map((result) => result.name)
+                places: places,
+                from: places[0],
+                to: places[1]
             });
         })
     }

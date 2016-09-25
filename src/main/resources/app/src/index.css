@@ -15,4 +15,8 @@ body {
 #startButton {
   width: 200px; }
 
+form {
+  text-align: left;
+  font-size: 25px; }
+
 /*# sourceMappingURL=index.css.map */

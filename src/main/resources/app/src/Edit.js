@@ -17,17 +17,28 @@ class Edit extends Component {
            console.log(this.props.to);
            return 'error';
        } else {
-           return 'sucess';
+           return 'success';
        }
     }
 
     render() {
 
-        let placesFrom = this.props.places.map((place) => <option key={place} value={place}>{place}</option>);
-        let placesTo = placesFrom;
+        const placesFrom = this.props.places.map((place) => {
+            if (this.props.from === place) {
+                return <option key={place} value={place} selected>{place}</option>;
+            } else {
+                return <option key={place} value={place}>{place}</option>;
+            }
+        });
+        const placesTo = this.props.places.map((place) => {
+            if (this.props.to === place) {
+                return <option key={place} value={place} selected>{place}</option>;
+            } else {
+                return <option key={place} value={place}>{place}</option>;
+            }
+        });
 
         return (
-            <Well bsSize="small">
                 <form>
                     <FormGroup bsSize="large">
                         <FormControl type="text" placeholder="Note" />
@@ -47,7 +58,6 @@ class Edit extends Component {
                         </FormControl>
                     </FormGroup>
                 </form>
-            </Well>
         )
     }
 }
