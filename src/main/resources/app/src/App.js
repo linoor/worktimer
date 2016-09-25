@@ -13,7 +13,7 @@ class App extends Component {
             timestamp: null,
             started: false,
             commuteHref: null
-        }
+        };
 
         this.startTimer = this.startTimer.bind(this, this.state.secondsElapsed);
         this.tick = this.tick.bind(this);
@@ -31,6 +31,12 @@ class App extends Component {
 
     endTimer() {
         clearInterval(this.interval);
+        this.setState({
+            secondsElapsed: 0,
+            timestamp: null,
+            started: false,
+            commuteHref: null
+        })
     }
 
     handleClick() {
