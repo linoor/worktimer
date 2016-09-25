@@ -43,7 +43,7 @@ public class CommuteController {
         Measurement measurement = measurementRepository.save(new Measurement(Measurement.Type.START, commute));
         commute.addMeasurement(measurement);
 
-        Resource<Commute> resource = new Resource<>(commute);
+        Resource<Measurement> resource = new Resource<>(measurement);
         resource.add(entityLinks.linkToSingleResource(Commute.class, commute.getId()));
 
         return ResponseEntity.ok(resource);
