@@ -3,7 +3,6 @@ import './App.css';
 import Timer from './Timer.js';
 import Starter from './Starter.js';
 import $ from 'jquery';
-import { browserHistory } from 'react-router';
 
 class App extends Component {
     constructor(props, context) {

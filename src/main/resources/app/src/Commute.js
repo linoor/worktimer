@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import Timer from './Timer.js';
 import Edit from './Edit.js';
 import { Row } from "react-bootstrap";
+import $ from 'jquery';
 
 class Commute extends Component {
     constructor(props) {
