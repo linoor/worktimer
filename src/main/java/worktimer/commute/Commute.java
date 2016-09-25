@@ -1,6 +1,7 @@
 package worktimer.commute;
 
 import lombok.Data;
+import worktimer.Place.Place;
 import worktimer.measurement.Measurement;
 
 import javax.persistence.*;
@@ -20,6 +21,11 @@ public class Commute {
 
     private String note;
     private String type;
+
+    @ManyToOne
+    private Place fromPlace;
+    @ManyToOne
+    private Place toPlace;
 
     @OneToMany
     private List<Measurement> measurements = new ArrayList<>();

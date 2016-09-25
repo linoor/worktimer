@@ -21,5 +21,6 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
         this.placeRepository.save(new Place("dom", "siemomysła 16"));
+        this.placeRepository.save(new Place("work", "lorem ipsum"));
     }
 }

@@ -16,15 +16,24 @@ class Commute extends Component {
         this.state = {
             secondsElapsed: 0,
             note: "",
-            type: ""
+            type: "",
+            places: []
         }
+    }
+
+    componentDidMount() {
+        $.get('http://localhost:8080/api/places', (results) => {
+            this.setState({
+                places: results._embedded.places.map((result) => result.name)
+            });
+        })
     }
 
     render() {
         return (
             <div>
                 <Row>
-                    <Edit note={this.state.note} type={this.state.type} />
+                    <Edit note={this.state.note} type={this.state.type} places={this.state.places} />
                 </Row>
             </div>
         )

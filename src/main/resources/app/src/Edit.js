@@ -9,9 +9,15 @@ import { Well, FormGroup, FormControl, ControlLabel  } from "react-bootstrap";
 class Edit extends Component {
     constructor(props) {
         super(props);
+
     }
 
+
     render() {
+
+        let placesFrom = this.props.places.map((place) => <option key={place} value={place}>{place}</option>);
+        let placesTo = placesFrom;
+
         return (
             <Well bsSize="small">
                 <form>
@@ -21,15 +27,13 @@ class Edit extends Component {
                     <FormGroup bsSize="large">
                         <ControlLabel>From</ControlLabel>
                         <FormControl componentClass="select" placeholder="select">
-                            <option value="select">select</option>
-                            <option value="other">...</option>
+                            {placesFrom}
                         </FormControl>
                     </FormGroup>
                     <FormGroup bsSize="large">
                         <ControlLabel>To</ControlLabel>
                         <FormControl componentClass="select" placeholder="select">
-                            <option value="select">select</option>
-                            <option value="other">...</option>
+                            {placesTo}
                         </FormControl>
                     </FormGroup>
                 </form>
