@@ -8,10 +8,7 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import worktimer.measurement.Measurement;
 import worktimer.measurement.MeasurementRepository;
 
@@ -23,6 +20,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by linoor on 9/8/16.
  */
+@CrossOrigin(origins = "http://localhost:3000")
 @RepositoryRestController
 public class CommuteController {
 
