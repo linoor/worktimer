@@ -12,7 +12,7 @@ class Starter extends Component {
 
         return (
             <Row>
-                <Button id="startButton" bsStyle="primary" bsSize="large">{buttonText}</Button>
+                <Button id="startButton" bsStyle="primary" bsSize="large" onClick={this.props.handler}>{buttonText}</Button>
             </Row>
         )
     }
