@@ -5,10 +5,13 @@
 
 import React, { Component } from 'react';
 import { Well, FormGroup, FormControl, ControlLabel, Button } from "react-bootstrap";
+import $ from 'jquery';
 
 class Edit extends Component {
     constructor(props) {
         super(props);
+
+        this.updateCommute = this.updateCommute.bind(this);
     }
 
     getValidationState() {
@@ -19,6 +22,23 @@ class Edit extends Component {
        } else {
            return 'success';
        }
+    }
+
+    updateCommute(e) {
+        e.preventDefault();
+        $.ajax({
+            url: this.props.commuteHref,
+            type: 'PUT',
+            data: {
+                note: this.props.note,
+                type: this.props.type
+            },
+            success: (result) => {
+                this.setState({
+                    message: 'The commute has been updated'
+                });
+            }
+        });
     }
 
     render() {
@@ -40,7 +60,7 @@ class Edit extends Component {
 
         return (
             <Well>
-                <form>
+                <form onSubmit={this.updateCommute}>
                     <FormGroup bsSize="large" validationState={this.getValidationState()}>
                         <ControlLabel>From</ControlLabel>
                         <FormControl componentClass="select" placeholder="select"

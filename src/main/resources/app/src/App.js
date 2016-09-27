@@ -60,7 +60,8 @@ class App extends Component {
           <Timer seconds={this.state.secondsElapsed} started={this.state.started} />
           {this.props.children && React.cloneElement(this.props.children, {
              started: this.state.started,
-              handler: this.handleClick.bind(this)
+              handler: this.handleClick.bind(this),
+              commuteHref: this.state.commuteHref
           })}
       </div>
     );

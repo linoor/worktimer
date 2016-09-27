@@ -20,6 +20,7 @@ class Commute extends Component {
             places: [],
             from: null,
             to: null,
+            message: ''
         };
 
         this.update = this.update.bind(this);
@@ -53,6 +54,7 @@ class Commute extends Component {
                           places={this.state.places}
                           from={this.state.from}
                           to={this.state.to}
+                          commuteHref={this.props.commuteHref}
                           updateHandler={this.update} />
                 </Row>
             </div>
