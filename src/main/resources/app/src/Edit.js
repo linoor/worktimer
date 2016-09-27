@@ -12,6 +12,11 @@ class Edit extends Component {
         super(props);
 
         this.updateCommute = this.updateCommute.bind(this);
+        this.resetBtn = this.resetBtn.bind(this);
+
+        this.state = {
+            btnStyle: 'primary'
+        }
     }
 
     getValidationState() {
@@ -22,6 +27,12 @@ class Edit extends Component {
        } else {
            return 'success';
        }
+    }
+
+    resetBtn() {
+        this.setState({
+            btnStyle: 'primary'
+        })
     }
 
     updateCommute(e) {
@@ -37,7 +48,8 @@ class Edit extends Component {
             }),
             success: (result) => {
                 this.setState({
-                    message: 'The commute has been updated'
+                    message: 'The commute has been updated',
+                    btnStyle: 'success'
                 });
             }
         });
@@ -62,7 +74,7 @@ class Edit extends Component {
 
         return (
             <Well>
-                <form onSubmit={this.updateCommute}>
+                <form onSubmit={this.updateCommute} onChange={this.resetBtn}>
                     <FormGroup bsSize="large" validationState={this.getValidationState()}>
                         <ControlLabel>From</ControlLabel>
                         <FormControl componentClass="select" placeholder="select"
@@ -87,7 +99,7 @@ class Edit extends Component {
                         <FormControl type="text" placeholder="Note"
                             onChange={this.props.updateHandler('note')} />
                     </FormGroup>
-                    <Button id="submitButton" type="submit" bsSize="large" block>
+                    <Button id="submitButton" type="submit" bsSize="large" bsStyle={this.state.btnStyle} block>
                         Update
                     </Button>
                 </form>
