@@ -29,10 +29,12 @@ class Edit extends Component {
         $.ajax({
             url: this.props.commuteHref,
             type: 'PUT',
-            data: {
+            contentType: "application/json",
+            dataType: 'json',
+            data: JSON.stringify({
                 note: this.props.note,
                 type: this.props.type
-            },
+            }),
             success: (result) => {
                 this.setState({
                     message: 'The commute has been updated'
@@ -76,8 +78,14 @@ class Edit extends Component {
                         </FormControl>
                     </FormGroup>
                     <FormGroup bsSize="large">
+                        <ControlLabel>Type</ControlLabel>
+                        <FormControl type="text" placeholder="Type"
+                                     onChange={this.props.updateHandler('type')} />
+                    </FormGroup>
+                    <FormGroup bsSize="large">
                         <ControlLabel>Note</ControlLabel>
-                        <FormControl type="text" placeholder="Note" />
+                        <FormControl type="text" placeholder="Note"
+                            onChange={this.props.updateHandler('note')} />
                     </FormGroup>
                     <Button id="submitButton" type="submit" bsSize="large" block>
                         Update
