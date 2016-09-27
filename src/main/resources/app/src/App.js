@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Timer from './Timer.js';
-import Starter from './Starter.js';
 import $ from 'jquery';
 
 class App extends Component {
@@ -31,12 +30,6 @@ class App extends Component {
 
     endTimer() {
         clearInterval(this.interval);
-        //this.setState({
-        //    secondsElapsed: 0,
-        //    timestamp: null,
-        //    started: false,
-        //    commuteHref: null
-        //})
     }
 
     handleClick() {

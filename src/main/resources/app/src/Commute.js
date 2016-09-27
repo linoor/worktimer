@@ -5,7 +5,6 @@
 
 import React, { Component } from 'react';
 //import { Row } from "react-bootstrap";
-import Timer from './Timer.js';
 import Edit from './Edit.js';
 import { Row } from "react-bootstrap";
 import $ from 'jquery';
