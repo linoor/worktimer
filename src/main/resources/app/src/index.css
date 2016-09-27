@@ -19,4 +19,8 @@ form {
   text-align: left;
   font-size: 25px; }
 
+#submitButton {
+  height: 80px;
+  margin-top: 60px; }
+
 /*# sourceMappingURL=index.css.map */

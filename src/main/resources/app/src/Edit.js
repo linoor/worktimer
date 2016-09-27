@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from 'react';
-import { Well, FormGroup, FormControl, ControlLabel  } from "react-bootstrap";
+import { Well, FormGroup, FormControl, ControlLabel, Button } from "react-bootstrap";
 
 class Edit extends Component {
     constructor(props) {
@@ -39,10 +39,8 @@ class Edit extends Component {
         });
 
         return (
+            <Well>
                 <form>
-                    <FormGroup bsSize="large">
-                        <FormControl type="text" placeholder="Note" />
-                    </FormGroup>
                     <FormGroup bsSize="large" validationState={this.getValidationState()}>
                         <ControlLabel>From</ControlLabel>
                         <FormControl componentClass="select" placeholder="select"
@@ -57,7 +55,15 @@ class Edit extends Component {
                             {placesTo}
                         </FormControl>
                     </FormGroup>
+                    <FormGroup bsSize="large">
+                        <ControlLabel>Note</ControlLabel>
+                        <FormControl type="text" placeholder="Note" />
+                    </FormGroup>
+                    <Button id="submitButton" type="submit" bsSize="large" block>
+                        Update
+                    </Button>
                 </form>
+            </Well>
         )
     }
 }
