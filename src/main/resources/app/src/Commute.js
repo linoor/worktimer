@@ -24,12 +24,22 @@ class Commute extends Component {
         };
 
         this.update = this.update.bind(this);
+        this.updatePlace = this.updatePlace.bind(this);
     }
 
     update(field) {
         return (e) => {
             let state = {};
             state[field] = e.target.value;
+            this.setState(state);
+        }
+    }
+
+    updatePlace(name) {
+        return (e) => {
+            let state = {};
+            let place = this.state.places.filter((place) => place.name === e.target.value)[0];
+            state[name] = place;
             this.setState(state);
         }
     }
@@ -55,6 +65,7 @@ class Commute extends Component {
                           from={this.state.from}
                           to={this.state.to}
                           commuteHref={this.props.commuteHref}
+                          updatePlace={this.updatePlace}
                           updateHandler={this.update} />
                 </Row>
             </div>

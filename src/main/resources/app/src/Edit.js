@@ -21,8 +21,6 @@ class Edit extends Component {
 
     getValidationState() {
        if (this.props.from === this.props.to) {
-           console.log(this.props.from);
-           console.log(this.props.to);
            return 'error';
        } else {
            return 'success';
@@ -44,7 +42,9 @@ class Edit extends Component {
             dataType: 'json',
             data: JSON.stringify({
                 note: this.props.note,
-                type: this.props.type
+                type: this.props.type,
+                toPlace: this.props.to._links.self.href,
+                fromPlace: this.props.from._links.self.href
             }),
             success: (result) => {
                 this.setState({
@@ -58,12 +58,12 @@ class Edit extends Component {
     render() {
         const placesFrom = this.props.places.map((place) => {
                 return <option key={place.name}
-                               value={place}
+                               value={place.name}
                                selected={this.props.from.name === place.name}>{place.name}</option>;
         });
         const placesTo = this.props.places.map((place) => {
             return <option key={place.name}
-                           value={place}
+                           value={place.name}
                            selected={this.props.to.name === place.name}>{place.name}</option>;
         });
 
@@ -73,14 +73,14 @@ class Edit extends Component {
                     <FormGroup bsSize="large" validationState={this.getValidationState()}>
                         <ControlLabel>From</ControlLabel>
                         <FormControl componentClass="select" placeholder="select"
-                                     onChange={this.props.updateHandler('from')}>
+                                     onChange={this.props.updatePlace('from')}>
                             {placesFrom}
                         </FormControl>
                     </FormGroup>
                     <FormGroup bsSize="large" validationState={this.getValidationState()}>
                         <ControlLabel>To</ControlLabel>
                         <FormControl componentClass="select" placeholder="select"
-                                     onChange={this.props.updateHandler('to')}>
+                                     onChange={this.props.updatePlace('to')}>
                             {placesTo}
                         </FormControl>
                     </FormGroup>

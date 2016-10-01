@@ -37,11 +37,26 @@ public class Commute {
         this.type = type;
     }
 
+    public Commute(String note, String type, Place fromPlace, Place toPlace) {
+        this.note = note;
+        this.type = type;
+        this.fromPlace = fromPlace;
+        this.toPlace = toPlace;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void addMeasurement(Measurement measurement) {
         this.measurements.add(measurement);
+    }
+
+    public void setFromPlace(Place fromPlace) {
+        this.fromPlace = fromPlace;
+    }
+
+    public void setToPlace(Place toPlace) {
+        this.toPlace = toPlace;
     }
 }
