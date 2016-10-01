@@ -56,16 +56,16 @@ class Edit extends Component {
     }
 
     render() {
-
-        const placesFrom = this.props.places.map((place) => {
-            if (this.props.from === place) {
-                return <option key={place} value={place} selected>{place}</option>;
+        const placesNames  = this.props.places.map((place) => place.name);
+        const placesFrom = placesNames.map((place) => {
+            if (this.props.from.name === place) {
+                return <option key={place} value={place}>{place}</option>;
             } else {
                 return <option key={place} value={place}>{place}</option>;
             }
         });
-        const placesTo = this.props.places.map((place) => {
-            if (this.props.to === place) {
+        const placesTo = placesNames.map((place) => {
+            if (this.props.to.name === place) {
                 return <option key={place} value={place} selected>{place}</option>;
             } else {
                 return <option key={place} value={place}>{place}</option>;
