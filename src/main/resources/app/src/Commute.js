@@ -57,6 +57,10 @@ class Commute extends Component {
             })
         });
 
+        $.get(commuteHref + '/measurements/elapsed', (result) => {
+          this.props.updateTimer(result.content);
+        });
+
         $.get('http://localhost:8080/api/places', (results) => {
             const places = results._embedded.places;
             this.setState({
