@@ -107,7 +107,7 @@ public class CommuteController {
 
             Number result = dates.get(0)._2.zip(dates.get(1)._2)
                     .map(tuple -> tuple._1.getTime() - tuple._2.getTime())
-                    .map(num -> num / 1000)
+                    .map(num -> Math.abs(num / 1000))
                     .sum();
 
             Resource<Number> resources = new Resource<>(result);
