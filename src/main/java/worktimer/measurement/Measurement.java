@@ -36,6 +36,14 @@ public class Measurement {
         this(new Date(), type, commute);
     }
 
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
     public enum Type {
         START, STOP
     }
