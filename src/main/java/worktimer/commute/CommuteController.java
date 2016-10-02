@@ -11,14 +11,13 @@ import org.springframework.hateoas.Resources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import worktimer.place.Place;
 import worktimer.place.PlaceRepository;
 import worktimer.measurement.Measurement;
 import worktimer.measurement.MeasurementRepository;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -32,12 +31,14 @@ public class CommuteController {
 
     private final CommuteRepository commuteRepository;
     private final MeasurementRepository measurementRepository;
+    private final PlaceRepository placeRepository;
     private final EntityLinks entityLinks;
 
     @Autowired
-    public CommuteController(CommuteRepository commuteRepository, MeasurementRepository measurementRepository, EntityLinks entityLinks) {
+    public CommuteController(CommuteRepository commuteRepository, MeasurementRepository measurementRepository, PlaceRepository placeRepository, EntityLinks entityLinks) {
         this.commuteRepository = commuteRepository;
         this.measurementRepository = measurementRepository;
+        this.placeRepository = placeRepository;
         this.entityLinks = entityLinks;
     }
 

@@ -2,6 +2,7 @@ package worktimer.commute;
 
 import org.springframework.data.repository.CrudRepository;
 import worktimer.measurement.Measurement;
+import worktimer.place.Place;
 
 import java.util.List;
 

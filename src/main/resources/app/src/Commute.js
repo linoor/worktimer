@@ -65,10 +65,20 @@ class Commute extends Component {
             const places = results._embedded.places;
             this.setState({
                 places: places,
-                from: places[0],
-                to: places[1]
             });
         });
+
+        $.get(commuteHref + '/fromPlace', (result) => {
+            this.setState({
+                from: result || this.state.places[0]
+            });
+        });
+
+        $.get(commuteHref + '/toPlace', (result) => {
+            this.setState({
+                to: result || this.state.places[1]
+            })
+        })
     }
 
     render() {
