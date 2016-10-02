@@ -50,35 +50,45 @@ class Commute extends Component {
         this.setState({
             commuteHref: commuteHref
         });
-        $.get(commuteHref, (result) => {
-            this.setState({
-                note: result.note,
-                type: result.type
-            })
-        });
-
-        $.get(commuteHref + '/measurements/elapsed', (result) => {
-          this.props.updateTimer(result.content);
-        });
 
         $.get('http://localhost:8080/api/places', (results) => {
             const places = results._embedded.places;
             this.setState({
                 places: places,
+                from: places[1],
+                to: places[0],
             });
         });
 
-        $.get(commuteHref + '/fromPlace', (result) => {
-            this.setState({
-                from: result || this.state.places[0]
-            });
+        $.get(commuteHref + '/measurements/elapsed', (result) => {
+            this.props.updateTimer(result.content);
         });
 
-        $.get(commuteHref + '/toPlace', (result) => {
-            this.setState({
-                to: result || this.state.places[1]
-            })
-        })
+        // if not new
+        if (this.props.location.query == null || this.props.location.query.new !== "true") {
+
+            $.get(commuteHref, (result) => {
+                this.setState({
+                    note: result.note,
+                    type: result.type
+                })
+            });
+
+            $.ajax({
+                url: commuteHref + '/fromPlace',
+                type: 'GET',
+                success: (result) => {
+                    this.setState({
+                        from: result
+                    });
+                },
+                error: (result) => {
+                    this.setState({
+                        from: this.state.places[1]
+                    });
+                }
+            });
+        }
     }
 
     render() {

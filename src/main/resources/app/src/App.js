@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, browserHistory } from 'react-router'
 import './App.css';
 import Timer from './Timer.js';
 import $ from 'jquery';
@@ -49,8 +50,12 @@ class App extends Component {
                this.setState({
                    started: false
                });
-               let path = this.state.commuteHref.replace("/api", "");
-               this.props.history.push(path);
+               let path = this.state.commuteHref.replace("/api", "").split("/").splice(-2).join("/");
+               //this.props.history.push(path, {new: true});
+               browserHistory.push({
+                   pathname: path,
+                   search: '?new=true'
+               });
            })
        }
     }
