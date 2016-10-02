@@ -17,6 +17,7 @@ class App extends Component {
         this.startTimer = this.startTimer.bind(this, this.state.secondsElapsed);
         this.tick = this.tick.bind(this);
         this.endtimer = this.endTimer.bind(this);
+        this.updateTimer = this.updateTimer.bind(this);
   }
     tick() {
         this.setState({
@@ -54,6 +55,12 @@ class App extends Component {
        }
     }
 
+    updateTimer(seconds) {
+        this.setState({
+            secondsElapsed: seconds
+        })
+    }
+
     render() {
     return (
       <div className="App">
@@ -61,7 +68,7 @@ class App extends Component {
           {this.props.children && React.cloneElement(this.props.children, {
              started: this.state.started,
               handler: this.handleClick.bind(this),
-              commuteHref: this.state.commuteHref
+              updateTimer: this.updateTimer
           })}
       </div>
     );

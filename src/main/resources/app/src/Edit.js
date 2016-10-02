@@ -86,12 +86,12 @@ class Edit extends Component {
                     </FormGroup>
                     <FormGroup bsSize="large">
                         <ControlLabel>Type</ControlLabel>
-                        <FormControl type="text" placeholder="Type"
+                        <FormControl type="text" placeholder="Type" value={this.props.type}
                                      onChange={this.props.updateHandler('type')} />
                     </FormGroup>
                     <FormGroup bsSize="large">
                         <ControlLabel>Note</ControlLabel>
-                        <FormControl type="text" placeholder="Note"
+                        <FormControl type="text" placeholder="Note" value={this.props.note}
                             onChange={this.props.updateHandler('note')} />
                     </FormGroup>
                     <Button id="submitButton" type="submit" bsSize="large" bsStyle={this.state.btnStyle} block>

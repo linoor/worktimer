@@ -20,7 +20,8 @@ class Commute extends Component {
             places: [],
             from: null,
             to: null,
-            message: ''
+            message: '',
+            commuteHref: null
         };
 
         this.update = this.update.bind(this);
@@ -45,6 +46,17 @@ class Commute extends Component {
     }
 
     componentDidMount() {
+        const commuteHref = `http://localhost:8080/api/commutes/${this.props.params.commuteId}`;
+        this.setState({
+            commuteHref: commuteHref
+        });
+        $.get(commuteHref, (result) => {
+            this.setState({
+                note: result.note,
+                type: result.type
+            })
+        });
+
         $.get('http://localhost:8080/api/places', (results) => {
             const places = results._embedded.places;
             this.setState({
@@ -52,7 +64,7 @@ class Commute extends Component {
                 from: places[0],
                 to: places[1]
             });
-        })
+        });
     }
 
     render() {
@@ -64,7 +76,7 @@ class Commute extends Component {
                           places={this.state.places}
                           from={this.state.from}
                           to={this.state.to}
-                          commuteHref={this.props.commuteHref}
+                          commuteHref={this.state.commuteHref}
                           updatePlace={this.updatePlace}
                           updateHandler={this.update} />
                 </Row>
