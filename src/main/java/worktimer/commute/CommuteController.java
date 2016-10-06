@@ -105,7 +105,15 @@ public class CommuteController {
                     = measurements.groupBy(Measurement::getType)
                                   .map(group -> Tuple.of(group._1, group._2.map(Measurement::getTimestamp))).toList();
 
-            Number result = dates.get(0)._2.zip(dates.get(1)._2)
+            Tuple2<Measurement.Type, javaslang.collection.List<Date>> starts = dates.get(0);
+            Tuple2<Measurement.Type, javaslang.collection.List<Date>> stops =
+                    dates.tail().getOrElse(Tuple.of(Measurement.Type.STOP, javaslang.collection.List.of(new Date())));
+
+            if (stops._2.size() < starts._2.size()) {
+                stops = Tuple.of(stops._1, stops._2.append(new Date()));
+            }
+
+            Number result = starts._2.zip(stops._2)
                     .map(tuple -> tuple._1.getTime() - tuple._2.getTime())
                     .map(num -> Math.abs(num / 1000))
                     .sum();
