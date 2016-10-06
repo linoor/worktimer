@@ -26,6 +26,26 @@ class App extends Component {
         });
     }
 
+    componentWillMount() {
+        // if there is a commute that is already running, redirect to it
+        $.get('http://localhost:8080/api/measurements', (results) => {
+            const lastCommute = results._embedded.measurements.slice(-1)[0];
+            if (lastCommute.type === 'START') {
+                $.get(lastCommute._links.commute.href, (commuteResult) => {
+                    let path = commuteResult._links.self.href
+                        .replace("/api", "")
+                        .split("/")
+                        .splice(-2)
+                        .join("/");
+                        browserHistory.push({
+                            pathname: path,
+                            search: ''
+                        });
+                });
+            }
+        })
+    }
+
     startTimer() {
         this.interval = setInterval(this.tick, 1000);
     }
