@@ -37,10 +37,11 @@ class App extends Component {
                         .split("/")
                         .splice(-2)
                         .join("/");
-                        browserHistory.push({
-                            pathname: path,
-                            search: ''
-                        });
+                    browserHistory.push({
+                        pathname: path,
+                        search: ''
+                    });
+                    this.startTimer();
                 });
             }
         })
@@ -93,7 +94,7 @@ class App extends Component {
           {this.props.children && React.cloneElement(this.props.children, {
              started: this.state.started,
               handler: this.handleClick.bind(this),
-              updateTimer: this.updateTimer
+              updateTimer: this.updateTimer,
           })}
       </div>
     );
