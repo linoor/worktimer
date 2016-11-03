@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Router, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 import './App.css';
 import Timer from './Timer.js';
 import $ from 'jquery';
+import Starter from './Starter.js';
 
 class App extends Component {
     constructor(props, context) {
@@ -40,6 +41,10 @@ class App extends Component {
                     browserHistory.push({
                         pathname: path,
                         search: ''
+                    });
+                    this.setState({
+                        started: true,
+                        commuteHref: commuteResult._links.self.href
                     });
                     this.startTimer();
                 });
@@ -91,6 +96,7 @@ class App extends Component {
     return (
       <div className="App">
           <Timer seconds={this.state.secondsElapsed} started={this.state.started} />
+          <Starter started={this.state.started} handler={this.handleClick.bind(this)} updateTimer={this.updateTimer} />
           {this.props.children && React.cloneElement(this.props.children, {
              started: this.state.started,
               handler: this.handleClick.bind(this),

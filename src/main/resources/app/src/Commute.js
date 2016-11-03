@@ -91,6 +91,15 @@ class Commute extends Component {
         }
     }
 
+    stopTimer() {
+        $.post(this.state.commuteHref + "/stop", (result) => {
+            this.endTimer();
+            this.setState({
+                started: false
+            });
+        });
+    }
+
     render() {
         return (
             <div>
