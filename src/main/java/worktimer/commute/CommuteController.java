@@ -17,6 +17,7 @@ import worktimer.measurement.Measurement;
 import worktimer.measurement.MeasurementRepository;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -153,5 +154,10 @@ public class CommuteController {
         }
     }
 
+//    @RequestMapping(method = RequestMethod.GET, value = "/commutes/latest")
+//    public @ResponseBody ResponseEntity<?> latestCommute() {
+//        Commute commutes = commuteRepository.findFirstByMeasurements();
+//        return ResponseEntity.ok(new Resource<>(commutes));
+//    }
 
 }
