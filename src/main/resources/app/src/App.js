@@ -96,7 +96,10 @@ class App extends Component {
     return (
       <div className="App">
           <Timer seconds={this.state.secondsElapsed} started={this.state.started} />
-          <Starter started={this.state.started} handler={this.handleClick.bind(this)} updateTimer={this.updateTimer} />
+          <Starter started={this.state.started}
+                   handler={this.handleClick.bind(this)}
+                   updateTimer={this.updateTimer}
+                   seconds={this.state.secondsElapsed} />
           {this.props.children && React.cloneElement(this.props.children, {
              started: this.state.started,
               handler: this.handleClick.bind(this),

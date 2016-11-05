@@ -8,7 +8,7 @@ import { Button, Row } from "react-bootstrap";
 class Starter extends Component {
     render() {
 
-        let buttonText = this.props.started? "Stop" : "Start";
+        let buttonText = this.props.started? "Stop" : (this.props.seconds > 0 ? "Continue" : "Start");
 
         return (
             <Row>
