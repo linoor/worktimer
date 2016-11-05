@@ -62,14 +62,23 @@ class App extends Component {
 
     handleClick() {
        if (!this.state.started) {
-           $.post('http://localhost:8080/api/commutes/start', (result) => {
-               this.setState({
-                   timestamp: result.timestamp,
-                   commuteHref: result._links.commute.href,
-                   started: true
+           if (this.state.secondsElapsed === 0) {
+               $.post('http://localhost:8080/api/commutes/start', (result) => {
+                   this.setState({
+                       timestamp: result.timestamp,
+                       commuteHref: result._links.commute.href,
+                       started: true
+                   });
+                   this.startTimer();
                });
-               this.startTimer();
-           });
+           } else {
+               $.post(this.state.commuteHref + '/continue', (result) => {
+                   this.setState({
+                       started: true
+                   });
+                   this.startTimer();
+               });
+           }
        } else if (this.state.secondsElapsed > 0) {
            $.post(this.state.commuteHref + "/stop", (result) => {
                this.endTimer();
@@ -77,7 +86,6 @@ class App extends Component {
                    started: false
                });
                let path = this.state.commuteHref.replace("/api", "").split("/").splice(-2).join("/");
-               //this.props.history.push(path, {new: true});
                browserHistory.push({
                    pathname: path,
                    search: '?new=true'

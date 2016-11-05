@@ -127,7 +127,7 @@ public class CommuteController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/commutes/{id}/start")
+    @RequestMapping(method = RequestMethod.POST, value = "/commutes/{id}/continue")
     public @ResponseBody ResponseEntity<?> restartCommute(@PathVariable("id") long commuteId) {
         try {
             Commute commute = commuteRepository.findOne(commuteId);
