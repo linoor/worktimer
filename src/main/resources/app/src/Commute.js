@@ -9,7 +9,7 @@ import Edit from './Edit.js';
 import { Row } from "react-bootstrap";
 import $ from 'jquery';
 //import localhost from './index.js';
-const localhost = "http://localhost:8080";
+const localhost = "";
 
 class Commute extends Component {
     constructor(props) {

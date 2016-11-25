@@ -4,7 +4,7 @@ import './App.css';
 import Timer from './Timer.js';
 import $ from 'jquery';
 import Starter from './Starter.js';
-const localhost = 'http://localhost:8080';
+const localhost = "";
 
 class App extends Component {
     constructor(props, context) {
