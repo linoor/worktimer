@@ -4,6 +4,7 @@ import './App.css';
 import Timer from './Timer.js';
 import $ from 'jquery';
 import Starter from './Starter.js';
+const localhost = 'http://localhost:8080';
 
 class App extends Component {
     constructor(props, context) {
@@ -29,7 +30,7 @@ class App extends Component {
 
     componentWillMount() {
         // if there is a commute that is already running, redirect to it
-        $.get('http://localhost:8080/api/measurements', (results) => {
+        $.get(localhost + '/api/measurements', (results) => {
             const lastCommute = results._embedded.measurements.slice(-1)[0];
             if (lastCommute.type === 'START') {
                 $.get(lastCommute._links.commute.href, (commuteResult) => {
@@ -63,7 +64,7 @@ class App extends Component {
     handleClick() {
        if (!this.state.started) {
            if (this.state.secondsElapsed === 0) {
-               $.post('http://localhost:8080/api/commutes/start', (result) => {
+               $.post(localhost + '/api/commutes/start', (result) => {
                    this.setState({
                        timestamp: result.timestamp,
                        commuteHref: result._links.commute.href,

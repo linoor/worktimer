@@ -8,6 +8,8 @@ import React, { Component } from 'react';
 import Edit from './Edit.js';
 import { Row } from "react-bootstrap";
 import $ from 'jquery';
+//import localhost from './index.js';
+const localhost = "http://localhost:8080";
 
 class Commute extends Component {
     constructor(props) {
@@ -46,12 +48,12 @@ class Commute extends Component {
     }
 
     componentDidMount() {
-        const commuteHref = `http://localhost:8080/api/commutes/${this.props.params.commuteId}`;
+        const commuteHref = `localhost/api/commutes/${this.props.params.commuteId}`;
         this.setState({
             commuteHref: commuteHref
         });
 
-        $.get('http://localhost:8080/api/places', (results) => {
+        $.get(localhost + '/api/places', (results) => {
             const places = results._embedded.places;
             this.setState({
                 places: places,
