@@ -48,7 +48,7 @@ class Commute extends Component {
     }
 
     componentDidMount() {
-        const commuteHref = `localhost/api/commutes/${this.props.params.commuteId}`;
+        const commuteHref = `${localhost}/api/commutes/${this.props.params.commuteId}`;
         this.setState({
             commuteHref: commuteHref
         });
