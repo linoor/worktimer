@@ -18,7 +18,7 @@ class HomeController {
         return "index"
     }
 
-    @RequestMapping(value = "/commutes/*", method = arrayOf(RequestMethod.GET))
+    @RequestMapping(value = "/commutes/{id}", method = arrayOf(RequestMethod.GET))
     fun commutes(): String {
         return "index"
     }
